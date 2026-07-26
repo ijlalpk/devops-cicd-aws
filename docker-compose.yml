@@ -1,0 +1,46 @@
+# =============================================================================
+# docker-compose.yml - for LOCAL testing only, before you touch AWS.
+# It starts your app plus a throwaway MySQL, so you can prove the app works
+# without paying for RDS or waiting for it to provision.
+#
+#   docker compose up --build      start
+#   docker compose logs -f app     watch logs
+#   docker compose down -v         stop and delete the test database
+# =============================================================================
+services:
+  app:
+    build: .
+    ports:
+      - "8080:5000"          # visit http://localhost:8080
+    environment:
+      APP_VERSION: "local-dev"
+      AWS_REGION: "eu-north-1"
+      DB_HOST: "db"          # 'db' is the service name below - Docker resolves it
+      DB_PORT: "3306"
+      DB_USER: "appuser"
+      DB_PASSWORD: "localpassword"
+      DB_NAME: "appdb"
+      S3_BUCKET: ""          # empty locally; storage card will show "not set"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: "rootpassword"
+      MYSQL_DATABASE: "appdb"
+      MYSQL_USER: "appuser"
+      MYSQL_PASSWORD: "localpassword"
+    ports:
+      - "3307:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  dbdata:
