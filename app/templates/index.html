@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DevOps CI/CD Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 { color: #667eea; }
+        .status { background: #4caf50; color: white; padding: 10px; border-radius: 5px; margin: 20px 0; }
+        form { margin: 20px 0; }
+        input, textarea { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; }
+        button { background: #667eea; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #764ba2; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 DevOps CI/CD Demo</h1>
+        <div class="status">✓ Application is Healthy</div>
+
+        <h2>Save Feedback</h2>
+        <form id="feedbackForm">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <textarea name="message" placeholder="Your Message" required></textarea>
+            <button type="submit">Save Feedback</button>
+        </form>
+
+        <h2>Upload File</h2>
+        <form id="uploadForm">
+            <input type="file" name="file" required>
+            <button type="submit">Upload to S3</button>
+        </form>
+
+        <p style="margin-top: 40px; color: #999; font-size: 12px;">
+            Built with: Python • Flask • Docker • AWS EC2 • RDS • S3
+        </p>
+    </div>
+
+    <script>
+        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            fetch('/feedback', { method: 'POST', body: new FormData(this) })
+                .then(r => r.json())
+                .then(data => alert(data.message))
+                .catch(err => alert('Error: ' + err));
+        });
+
+        document.getElementById('uploadForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            fetch('/upload', { method: 'POST', body: new FormData(this) })
+                .then(r => r.json())
+                .then(data => alert(data.message))
+                .catch(err => alert('Error: ' + err));
+        });
+    </script>
+</body>
+</html>
