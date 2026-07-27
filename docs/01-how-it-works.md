@@ -1,4 +1,4 @@
-# How the Pipeline Works
+# How the Pipeline Works. 
 
 ## The Flow
 
