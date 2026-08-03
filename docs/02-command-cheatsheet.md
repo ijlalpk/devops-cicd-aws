@@ -1,4 +1,4 @@
-# Command Cheatsheet
+# Command Cheatsheet 
 
 ## Docker Compose (Local Testing)
 
