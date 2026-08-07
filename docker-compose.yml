@@ -3,7 +3,7 @@
 # It starts your app plus a throwaway MySQL, so you can prove the app works
 # without paying for RDS or waiting for it to provision.
 #
-#   docker compose up --build      start
+#   docker compose up --build      start 
 #   docker compose logs -f app     watch logs
 #   docker compose down -v         stop and delete the test database
 # =============================================================================
