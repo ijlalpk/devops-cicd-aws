@@ -1,5 +1,5 @@
 // =============================================================================
-// Jenkinsfile - your pipeline as code.
+// Jenkinsfile - your pipeline as code. 
 //
 // This file lives in Git next to your app. That is the whole idea of
 // "pipeline as code": the build process is versioned, reviewed and rolled back
