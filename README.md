@@ -1,4 +1,4 @@
-# Automated CI/CD Pipeline on AWS
+# Automated CI/CD Pipeline on AWS 
 
 A production-style deployment pipeline: a push to `main` runs the tests, builds a
 Docker image, ships it to two EC2 instances behind an Application Load Balancer,
